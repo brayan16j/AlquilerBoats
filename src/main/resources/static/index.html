@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <title>Barcos Melloz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/myStyle.css">
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<body>
+<h1>Bienvenidos a barcos melloz</h1>
+
+    <div class="container md p-3">
+        <div class="caontainer unathenticated">
+            Para iniciar sesion has click <a href="/oauth2/authorization/github">aqui</a>
+        </div>
+
+        <div class="container authenticated" style="display: none">
+            Has sido autenticado: <span id="usuario"></span>
+            <button onclick="location.href='homePage.html';">Continuar</button>
+        </div>
+        <script type="text/javascript">
+            $.get("/user", function (data){
+                $("#usuario").html(data.name);
+                $(".unathenticated").hide(); // ocultar con hide o mostrar con show
+                $(".authenticated").show();
+            });
+        </script>
+        <div class="myForm">
+            <input id="idBoat" type="hidden">
+            <label for="nameBoat" class="form-label">Nombre</label>
+            <input id="nameBoat" type="text"><br>
+            <label for="brandBoat" class="form-label">Modelo</label>
+            <input id="brandBoat" type="text"><br>
+            <label for="yearBoat" class="form-label">Year</label>
+            <input id="yearBoat" type="number"><br>
+            <label for="descriptionBoat" class="form-label">Descripcion</label>
+            <textarea id="descriptionBoat"></textarea><br>
+            <select id="categorySelect" class="form-select">
+
+            </select><br>
+
+            <button type="button" class="btn btn-primary saveButtonJB" onclick="saveBoat()">Guardar</button>
+        </div>
+        <hr>
+        <div class="row row-cols-4 row-cols-md-2 g-4" id="results">
+
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="miJavaS.js"></script>
+</html>
